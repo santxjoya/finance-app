@@ -9,9 +9,11 @@ import {
 import { TextInput, Button, Text, Appbar } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AppLogo } from '../components/AppLogo'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { AuthStackParamList } from '../../navigation/AuthStack'
+type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>
 
-
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }: Props) {
   return (
     <SafeAreaView style={styles.screen} edges={['top']}>
       {/* HEADER – NO se mueve */}
@@ -57,7 +59,8 @@ export default function LoginScreen() {
               autoCapitalize="none"
             />
 
-            <Button
+            <Button 
+              onPress={() => navigation.replace('Home')}
               mode="contained"
               style={styles.button}
               contentStyle={styles.buttonContent}

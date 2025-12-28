@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from './src/presentation/screens/Login'
+import { NavigationContainer } from '@react-navigation/native'
+import { AuthStack } from './src/navigation/AuthStack'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { paperTheme } from './src/shared/Theme/paperTheme'
 
 export default function App() {
   return (
     <PaperProvider theme={paperTheme}>
-      <LoginScreen />
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
     </PaperProvider>
   )
 }
