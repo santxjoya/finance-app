@@ -8,22 +8,26 @@ import {
 } from 'react-native'
 import { TextInput, Button, Text, Appbar } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { AppLogo } from '../components/AppLogo'
+
 
 export default function LoginScreen() {
   return (
     <SafeAreaView style={styles.screen} edges={['top']}>
       {/* HEADER – NO se mueve */}
-      <Appbar.Header style={styles.header} elevated={false}>
-        <Appbar.Content
-          title="Finance-app"
-          titleStyle={styles.headerTitle}
-        />
-      </Appbar.Header>
+    <Appbar.Header style={styles.header} elevated={false}>
+      <View style={styles.headerCenter}>
+        <AppLogo size={50} />
+        <Text style={styles.headerTitle}>Finance-app</Text>
+      </View>
+    </Appbar.Header>
+
 
       {/* CONTENIDO – sí se mueve */}
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        keyboardVerticalOffset={-110}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.content}>
@@ -33,23 +37,24 @@ export default function LoginScreen() {
 
             <TextInput
               label="Email"
-              mode="outlined"
+              mode="flat"
               dense
               style={styles.input}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              returnKeyType="next"
               outlineStyle={styles.outline}
+              autoCorrect={false}
+              autoCapitalize="none"
             />
 
             <TextInput
               label="Password"
-              mode="outlined"
+              mode="flat"
               dense
               style={styles.input}
               secureTextEntry
               returnKeyType="done"
               outlineStyle={styles.outline}
+              autoCorrect={false}
+              autoCapitalize="none"
             />
 
             <Button
@@ -66,9 +71,6 @@ export default function LoginScreen() {
   )
 }
 
-
-
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -77,16 +79,27 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#F2F2F7',
     elevation: 0,
+    alignItems: 'center',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginBottom: 10,
   },
-  headerTitle: {
-    fontSize: 15,
-    fontWeight: '500',
-  },
+headerCenter: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  alignSelf: 'center',
+},
+headerTitle: {
+  fontSize: 15,
+  fontWeight: '500',
+  marginLeft: 1,
+  color: '#1C1C1E',
+},
   content: {
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 30,
-    paddingBottom: 150,
+    paddingBottom: 180,
   },
   title: {
     textAlign: 'center',
@@ -108,5 +121,3 @@ const styles = StyleSheet.create({
     height: 48,
   },
 })
-
-
