@@ -11,9 +11,38 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { AppLogo } from '../components/AppLogo'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { AuthStackParamList } from '../../navigation/AuthStack'
+import { useState } from 'react'
+import { signInRequest } from '../../infrastructure/api/auth.api'
+import * as SecureStore from 'expo-secure-store'
+
+
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>
 
 export default function LoginScreen({ navigation }: Props) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+    async function handleLogin() {
+  if (!email || !password) {
+    alert('Completa todos los campos')
+    return
+  }
+
+  try {
+    setLoading(true)
+
+    const data = await signInRequest(email, password)
+
+    await SecureStore.setItemAsync('token', data.token)
+
+    navigation.replace('Home')
+  } catch (err: any) {
+    alert(err)
+    alert(err?.response?.data?.message || 'Error al iniciar sesión')
+  } finally {
+    setLoading(false)
+  }
+}
   return (
     <SafeAreaView style={styles.screen} edges={['top']}>
       {/* HEADER – NO se mueve */}
@@ -41,6 +70,8 @@ export default function LoginScreen({ navigation }: Props) {
               label="Email"
               mode="flat"
               dense
+              value={email}
+              onChangeText={setEmail}
               style={styles.input}
               outlineStyle={styles.outline}
               autoCorrect={false}
@@ -49,6 +80,8 @@ export default function LoginScreen({ navigation }: Props) {
 
             <TextInput
               label="Password"
+              value={password}
+              onChangeText={setPassword}
               mode="flat"
               dense
               style={styles.input}
@@ -59,13 +92,16 @@ export default function LoginScreen({ navigation }: Props) {
               autoCapitalize="none"
             />
 
-            <Button 
-              onPress={() => navigation.replace('Home')}
+            <Button
+              onPress={handleLogin}
               mode="contained"
               style={styles.button}
               contentStyle={styles.buttonContent}
             >
               Continue
+            </Button>
+            <Button>
+              Sing Up
             </Button>
           </View>
         </TouchableWithoutFeedback>

@@ -13,6 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      },
       "supportsTablet": true
     },
     "android": {
@@ -25,6 +30,9 @@
     },
     "web": {
       "favicon": "./src/presentation/assets/Images/IconFinanceApp.png"
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
