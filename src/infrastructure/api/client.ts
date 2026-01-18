@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'https://olive-guests-stay.loca.lt/api/',
+  baseURL: `${process.env.API_URL}/api/`,
   timeout: 15000,
 })
