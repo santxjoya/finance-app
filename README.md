@@ -62,12 +62,6 @@ Este proyecto está construido con **Expo + React Native + TypeScript** y utiliz
 
 ## ⚙️ Instalación
 
-1. Clona el repositorio
-
-  git clone https://github.com/santxjoya/finance-app.git
-
-## ⚙️ Instalación
-
 1. Clona el repositorio:
 
 	git clone https://github.com/santxjoya/finance-app.git
